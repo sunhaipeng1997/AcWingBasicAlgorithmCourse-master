@@ -42,40 +42,46 @@
 ### Solution
 
 ```java 
-import java.util.*;
-import java.io.*;
 
-public class Main{
-    public static void main(String[] args) throws IOException{
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(in.readLine());
-        int[] q = new int[n];
-        String[] s = in.readLine().split(" ");
-        for(int i = 0; i < n; i++){
-            q[i] = Integer.parseInt(s[i]);
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+
+class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(new BufferedInputStream(System.in));
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
         }
-        quickSort(q, 0, n - 1);
-        for(int i = 0; i < n; i++){
-            System.out.print(q[i] + " ");
+        quickSort(a, 0, n - 1);
+        for (int i = 0; i < n; i++) {
+            System.out.print(a[i] + " ");
         }
-        in.close();
     }
-    
-    public static void quickSort(int[] q, int l, int r){
-        if(l >= r) return; 
-        int i = l - 1, j = r + 1, x = q[l + r >> 1];
-        while (i < j){
-            do i++; while(q[i] < x);
-            do j--; while(q[j] > x);
-            if(i < j) {
-                int t = q[i];
-                q[i] = q[j];
-                q[j] = t;
+
+    static void quickSort(int[] a, int l, int r) {
+        if (l >= r) return;
+        int x = a[l];
+        int i = l - 1;
+        int j = r + 1;
+        while (i < j) {
+            //快排重点，必须要用++i,和--j 避免[2,2]这种情况
+            while (a[++i] < x) ;
+            while (a[--j] > x) ;
+            if (i < j) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
             }
         }
-        quickSort(q, l, j);
-        quickSort(q, j + 1, r);
+        quickSort(a, l, j);
+        quickSort(a, j + 1, r);
     }
+
 }
 ```
 
