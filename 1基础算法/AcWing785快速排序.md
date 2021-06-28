@@ -69,7 +69,7 @@ class Main {
         int i = l - 1;
         int j = r + 1;
         while (i < j) {
-            //快排重点，必须要用++i,和--j 避免[2,2]这种情况
+            //快排重点，必须要用++i,和--j 避免[2,3]这种情况
             while (a[++i] < x) ;
             while (a[--j] > x) ;
             if (i < j) {
